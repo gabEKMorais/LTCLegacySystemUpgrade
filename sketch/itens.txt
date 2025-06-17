@@ -1,0 +1,23 @@
+banco.consultar_orçamento(id)
+Vendas (orçamento)
+ - Número da venda (id)
+ - Código do cliente (0)
+ - Total (1) (valor final)
+ 
+Vendas_itens
+ - Código do produto (0 -> passar para int)(if -> diferente de 0)
+ - Quantidade (1)
+ - Valor unitário (2)
+
+tuplaRetorno = banco.consultar_cliente(id)
+Clientes
+ - Código do cliente  (id)
+ - Nome do cliente (0)
+
+tuplaRetorno = banco.consultar_produto(id)
+ Produtos
+  - Código do produto (id) 
+  - Descrição do produto (0)
+
+
+  produtoOrc = produtoOrc[:36]
