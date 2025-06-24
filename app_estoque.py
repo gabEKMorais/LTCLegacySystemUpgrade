@@ -120,22 +120,22 @@ class RelatorioVendas(tk.Toplevel):
         quebralinha = False
         linha = 1
         for item in relatorio:
+            if (linha == 48):
+                pdf.add_page()
+                pdf.set_font("Helvetica", "B", 13)
+                pdf.cell(0, 14, f'LTC TECNOLOGIA - Relatório de Vendas de {self.data_inicial.get()} à {self.data_final.get()}', 0, 1, 'C')
+                pdf.set_font("Helvetica", "B", 8)
+                    linha = 0
             nome = self.item_nome(item[0])
             if quebralinha:
                 pdf.cell(10, 5, f'{item[0]}', 0, 0, 'C')
-                pdf.cell(70, 5, f' {nome} ', 0, 0, 'C')
+                pdf.cell(70, 5, f' {nome[:35]} ', 0, 0, 'C')
                 pdf.cell(10, 5, f'{item[1]}', 0, 1, 'C')
                 quebralinha = False
                 linha += 1
-                if (linha == 48):
-                    pdf.add_page()
-                    pdf.set_font("Helvetica", "B", 13)
-                    pdf.cell(0, 14, f'LTC TECNOLOGIA - Relatório de Vendas de {self.data_inicial.get()} à {self.data_final.get()}', 0, 1, 'C')
-                    pdf.set_font("Helvetica", "B", 8)
-                    linha = 0
             else:
                 pdf.cell(10, 5, f'{item[0]}', 0, 0, 'C')
-                pdf.cell(70, 5, f' {nome} ', 0, 0, 'C')
+                pdf.cell(70, 5, f' {nome[:35]} ', 0, 0, 'C')
                 pdf.cell(30, 5, f'{item[1]}', 0, 0, 'C')
                 pdf.cell(1, 7, '|', 0, 0, 'C')
                 quebralinha = True
@@ -259,18 +259,18 @@ class AppEstoque(tk.Frame):
         quebralinha = False
         linha = 1
         for produto in self.estoque:
+            if (linha == 48):
+                pdf.add_page()
+                pdf.set_font("Helvetica", "B", 13)
+                pdf.cell(0, 14, f'LTC TECNOLOGIA - CONTROLE DE ESTOQUE - {data}', 0, 1, 'C')
+                pdf.set_font("Helvetica", "B", 8)
+                linha = 0
             if quebralinha:
                 pdf.cell(10, 5, f'{produto.id}', 0, 0, 'C')
                 pdf.cell(70, 5, f' {produto.nome[:35]} ', 0, 0, 'C')
                 pdf.cell(10, 5, f'{produto.estoque}', 0, 1, 'C')
                 quebralinha = False
                 linha += 1
-                if (linha == 48):
-                    pdf.add_page()
-                    pdf.set_font("Helvetica", "B", 13)
-                    pdf.cell(0, 14, f'LTC TECNOLOGIA - CONTROLE DE ESTOQUE - {data}', 0, 1, 'C')
-                    pdf.set_font("Helvetica", "B", 8)
-                    linha = 0
             else:
                 pdf.cell(10, 5, f'{produto.id}', 0, 0, 'C')
                 pdf.cell(70, 5, f' {produto.nome[:35]} ', 0, 0, 'C')
