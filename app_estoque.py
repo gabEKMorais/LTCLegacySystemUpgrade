@@ -125,7 +125,7 @@ class RelatorioVendas(tk.Toplevel):
                 pdf.set_font("Helvetica", "B", 13)
                 pdf.cell(0, 14, f'LTC TECNOLOGIA - Relatório de Vendas de {self.data_inicial.get()} à {self.data_final.get()}', 0, 1, 'C')
                 pdf.set_font("Helvetica", "B", 8)
-                    linha = 0
+                linha = 1
             nome = self.item_nome(item[0])
             if quebralinha:
                 pdf.cell(10, 5, f'{item[0]}', 0, 0, 'C')
@@ -250,6 +250,7 @@ class AppEstoque(tk.Frame):
         if (self.pdf_relatorio):
             return exibir_pdf(self.pdf_relatorio, self.master)
     def imprime_estoque(self):
+        self.inicia_estoque()
         data = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
         pdf = FPDF()
         pdf.add_page()
@@ -264,7 +265,7 @@ class AppEstoque(tk.Frame):
                 pdf.set_font("Helvetica", "B", 13)
                 pdf.cell(0, 14, f'LTC TECNOLOGIA - CONTROLE DE ESTOQUE - {data}', 0, 1, 'C')
                 pdf.set_font("Helvetica", "B", 8)
-                linha = 0
+                linha = 1
             if quebralinha:
                 pdf.cell(10, 5, f'{produto.id}', 0, 0, 'C')
                 pdf.cell(70, 5, f' {produto.nome[:35]} ', 0, 0, 'C')

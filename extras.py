@@ -65,5 +65,5 @@ def excluir_pdf_temporario(nome_arquivo):
     except FileNotFoundError:
         print(f"Arquivo {nome_arquivo} não encontrado.")
 def ao_fechar_janela(pdf_view_instance, nome_arquivo_temporario):
-    excluir_pdf_temporario(nome_arquivo_temporario)
     pdf_view_instance.destroy()
+    excluir_pdf_temporario(nome_arquivo_temporario)

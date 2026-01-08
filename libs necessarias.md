@@ -1,5 +1,5 @@
 python -m pip install --upgrade pip
-pip install PIL
+pip install PILLOW
 pip install pyodbc
 pip install FPDF2 # nao "fdpf" senão nao funciona o retorno em bytes
 pip install pywin32

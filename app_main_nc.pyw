@@ -1,8 +1,7 @@
 import tkinter as tk
 from config import *
 from app_pdf_orcamento_class import app_pdf_orcamento
-from app_pdf_relatorio_class import app_pdf_relatorio
-from app_pdf_relatorio_pedido_class import app_pdf_relatorio_pedido
+from app_relatorios import AppRelatorio
 from app_vendas import AppVendas
 from app_estoque import AppEstoque
 from extras import centralizar_tela_app
@@ -27,21 +26,17 @@ class Aplicacao(tk.Tk):
         self.label_app_pdf_orcamento = tk.Label(self.header, text="ORÇAMENTO", font=("Arial", 16), bg=FUNDO_APP_PRINCIPAL_HEADER)
         self.label_app_pdf_orcamento.pack(side=tk.LEFT, expand=True)
         self.label_app_pdf_orcamento.bind("<Button-1>", self.abrir_app_pdf_orcamento)
-        self.label_app_relatorio = tk.Label(self.header, text="RELATÓRIO OS", font=("Arial", 16), bg=FUNDO_APP_PRINCIPAL_HEADER)
-        self.label_app_relatorio.pack(side=tk.LEFT, expand=True)
-        self.label_app_relatorio.bind("<Button-1>", self.abrir_app_pdf_relatorio)
-        self.label_app_relatorio_ped = tk.Label(self.header, text="RELATÓRIO PEDIDO", font=("Arial", 16), bg=FUNDO_APP_PRINCIPAL_HEADER)
-        self.label_app_relatorio_ped.pack(side=tk.LEFT, expand=True)
-        self.label_app_relatorio_ped.bind("<Button-1>", self.abrir_app_pdf_relatorio_ped)
+        self.label_app_relatorios = tk.Label(self.header, text="RELATÓRIOS", font=("Arial", 16), bg=FUNDO_APP_PRINCIPAL_HEADER)
+        self.label_app_relatorios.pack(side=tk.LEFT, expand=True)
+        self.label_app_relatorios.bind("<Button-1>", self.abrir_app_pdf_relatorio)
         #   APPS    
         self.app_pdf_orcamento_conteiner = app_pdf_orcamento(self, self.reinicia_app_orcamento)
-        self.app_pdf_relatorio_conteiner = app_pdf_relatorio(self)
-        self.app_pdf_relatorio_pedido_conteiner = app_pdf_relatorio_pedido(self)
+        self.app_relatorios_conteiner = AppRelatorio(self, self.reinicia_app_relatorios)
         self.app_vendas_conteiner = AppVendas(self, self.reinicia_app_vendas)
         self.app_estoque_conteiner = AppEstoque(self, self.reinicia_app_estoque)
-
         #   INICIO COM VENDAS
         self.abrir_app_vendas("Click")
+
     def abrir_app_pdf_orcamento(self, event):
         try:
             self.reset_apps()
@@ -56,17 +51,14 @@ class Aplicacao(tk.Tk):
     def abrir_app_pdf_relatorio(self, event):
         try:
             self.reset_apps()
-            self.app_pdf_relatorio_conteiner.pack(expand=True)
-            self.label_app_relatorio["bg"] = FUNDO_APP_PRINCIPAL_HEADER_SELECAO
+            self.app_relatorios_conteiner.pack(expand=True)
+            self.label_app_relatorios["bg"] = FUNDO_APP_PRINCIPAL_HEADER_SELECAO
         except Exception as e:
             print(f"Erro ao abrir modulo: {e}")
-    def abrir_app_pdf_relatorio_ped(self, event):
-        try:
-            self.reset_apps()
-            self.app_pdf_relatorio_pedido_conteiner.pack(expand=True)
-            self.label_app_relatorio_ped["bg"] = FUNDO_APP_PRINCIPAL_HEADER_SELECAO
-        except Exception as e:
-            print(f"Erro ao abrir modulo: {e}")
+    def reinicia_app_relatorios(self):
+        self.app_relatorios_conteiner.pack_forget()
+        self.app_relatorios_conteiner = AppRelatorio(self, self.reinicia_app_relatorios)
+        return self.app_relatorios_conteiner.pack(expand=True)
     def abrir_app_vendas(self, event):
         try:
             self.reset_apps()
@@ -92,14 +84,12 @@ class Aplicacao(tk.Tk):
     def reset_apps(self):
         # tira apps tela
         self.app_pdf_orcamento_conteiner.pack_forget()
-        self.app_pdf_relatorio_conteiner.pack_forget()
-        self.app_pdf_relatorio_pedido_conteiner.pack_forget()
+        self.app_relatorios_conteiner.pack_forget()
         self.app_vendas_conteiner.pack_forget()
         self.app_estoque_conteiner.pack_forget()
 
         self.label_app_pdf_orcamento["bg"] = FUNDO_APP_PRINCIPAL_HEADER
-        self.label_app_relatorio["bg"] = FUNDO_APP_PRINCIPAL_HEADER
-        self.label_app_relatorio_ped["bg"] = FUNDO_APP_PRINCIPAL_HEADER
+        self.label_app_relatorios["bg"] = FUNDO_APP_PRINCIPAL_HEADER
         self.label_app_vendas["bg"] = FUNDO_APP_PRINCIPAL_HEADER
         self.label_app_estoque["bg"] = FUNDO_APP_PRINCIPAL_HEADER
 
